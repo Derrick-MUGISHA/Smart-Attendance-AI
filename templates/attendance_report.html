@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .header { text-align: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2 f2 f2; }
+        .summary { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Attendance Report</h1>
+        <p>Class: {{ class_name }}</p>
+        <p>Date: {{ date }}</p>
+        <p>Instructor: {{ instructor_name }}</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Status</th>
+                <th>Confidence</th>
+                <th>Reviewer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.matched_name or record.ocr_raw_name }}</td>
+                <td>{{ record.status }}</td>
+                <td>{{ "%.1f"|format(record.confidence_score) if record.confidence_score else "-" }}%</td>
+                <td>{{ record.reviewed_by or "-" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="summary">
+        <h3>Summary</h3>
+        <p>Total Students: {{ stats.total }}</p>
+        <p>Present: {{ stats.present }}</p>
+        <p>Absent: {{ stats.absent }}</p>
+        <p>Attendance Rate: {{ stats.rate }}%</p>
+    </div>
+</body>
+</html>
