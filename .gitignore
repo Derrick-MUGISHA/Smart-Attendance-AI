@@ -30,7 +30,6 @@ venv.bak/
 
 # IDE
 .idea/
-.vscode/
 *.swp
 *.swo
 *~
@@ -70,3 +69,4 @@ Thumbs.db
 # Google drive files *.json
 app/gmail_credentials.json
 app/goole_credentials.json
+.gitignore
